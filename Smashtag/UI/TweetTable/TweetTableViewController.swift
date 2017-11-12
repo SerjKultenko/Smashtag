@@ -17,7 +17,7 @@ import Twitter
 // into the Embedded Binaries section
 // of the Project Settings of this application
 
-class TweetTableViewController: UITableViewController, UITextFieldDelegate
+class TweetTableViewController: UITableViewController, UITextFieldDelegate, TweetSearchHistoryUse, DependencyInjectorUse
 {
     // MARK: Model
 
@@ -25,7 +25,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     // each sub-Array of Tweets is another "pull" from Twitter
     // and corresponds to a section in our table
     var tweets = [Array<Twitter.Tweet>]()
-    
+
+    var tweetSearchHistory: TweetSearchHistory?
+    var dependencyInjector: DependencyInjector?
+
     // public part of our Model
     // when this is set
     // we'll reset our tweets Array
@@ -74,6 +77,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         // "lastTwitterRequest?.newer ??" was added after lecture for REFRESHING
         if let request = lastTwitterRequest?.newer ?? twitterRequest() {
             lastTwitterRequest = request
+            if searchText != nil {
+                tweetSearchHistory?.add(searchTerm: searchText!)
+            }
             request.fetchTweets { [weak self] newTweets in      // this is off the main queue
                 DispatchQueue.main.async {                      // so we must dispatch back to main queue
                     if request == self?.lastTwitterRequest {

@@ -19,6 +19,10 @@ struct TweetInfoModel {
         }
     }
     
+    var title: String {
+        return tweet.user.name
+    }
+    
     func numberOfRows(inSection section: Int) -> Int {
         guard sections.count > section else {
             return 0
@@ -115,24 +119,36 @@ struct TweetInfoModel {
             })
             sections.append(section)
         }
-        if tweet.userMentions.count>0 {
-            let section = TweetInfoSection(title: "Mentions",
-                                           type: .UserMentionsSection,
-                                           rowsNumber: tweet.userMentions.count,
-                                           titleForRowProvider: { (row: Int) -> String in
-                                            guard tweet.userMentions.count > row else {
-                                                return ""
-                                            }
-                                            return tweet.userMentions[row].keyword
-            },
-                                           objectForRowProvider: { (row: Int) -> Any? in
-                                            guard tweet.userMentions.count > row else {
-                                                return nil
-                                            }
-                                            return tweet.userMentions[row]
-            })
-            sections.append(section)
+            
+        // UserMentions
+        let titleForRowProvider = { (row: Int) -> String in
+            if row == 0 {
+                return "@" + tweet.user.screenName
+            }
+            let userMentionsIndex = row - 1
+            guard tweet.userMentions.count > userMentionsIndex else {
+                return ""
+            }
+            return tweet.userMentions[userMentionsIndex].keyword
         }
+        
+        let objectForRowProvider = { (row: Int) -> Any? in
+            if row == 0 {
+                return "@" + tweet.user.screenName
+            }
+            let userMentionsIndex = row - 1
+            guard tweet.userMentions.count > userMentionsIndex else {
+                return nil
+            }
+            return tweet.userMentions[userMentionsIndex]
+        }
+        
+        let section = TweetInfoSection(title: "Users",
+                                       type: .UserMentionsSection,
+                                       rowsNumber: tweet.userMentions.count + 1,
+                                       titleForRowProvider: titleForRowProvider,
+                                       objectForRowProvider: objectForRowProvider)
+        sections.append(section)
         return sections
     }
 }

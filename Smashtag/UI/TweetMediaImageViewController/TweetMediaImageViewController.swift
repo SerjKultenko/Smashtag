@@ -14,6 +14,7 @@ class TweetMediaImageViewController: UIViewController
     @IBOutlet weak var tweetMediaImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         if mediaImage != nil {

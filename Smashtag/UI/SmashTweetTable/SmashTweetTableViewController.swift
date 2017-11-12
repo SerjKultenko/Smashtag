@@ -21,14 +21,11 @@ class SmashTweetTableViewController: TweetTableViewController
     }
     
     private func updateDatabase(with tweets: [Twitter.Tweet]) {
-        //print("starting database load")
-        container?.performBackgroundTask { [weak self] context in
+        container?.performBackgroundTask { /*[weak self]*/ context in
             for twitterInfo in tweets {
                 _ = try? Tweet.findOrCreateTweet(matching: twitterInfo, in: context)
             }
             try? context.save()
-            //print("done loading database")
-            //self?.printDatabaseStatistics()
         }
     }
     
@@ -54,14 +51,15 @@ class SmashTweetTableViewController: TweetTableViewController
     }
     
     // MARK: Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Tweeters Mentioning Search Term" {
+        guard let segueIdentifier = segue.identifier else { return }
+        switch segueIdentifier {
+        case "Tweeters Mentioning Search Term":
             if let tweetersTVC = segue.destination as? SmashTweetersTableViewController {
                 tweetersTVC.mention = searchText
                 tweetersTVC.container = container
             }
-        } else if segue.identifier == "TweetInfoSegueIdentificator" {
+        case "TweetInfoSegueIdentificator":
             if let tweetInfoTVC = segue.destination as? TweetInfoTableTableViewController,
                 let cell = sender as? TweetTableViewCell,
                 let indexPath = tableView.indexPath(for: cell),
@@ -70,7 +68,29 @@ class SmashTweetTableViewController: TweetTableViewController
             {
                 let tweet = tweets[indexPath.section][indexPath.row]
                 tweetInfoTVC.tweetInfoModel = TweetInfoModel(for: tweet)
+                dependencyInjector?.inject(to: tweetInfoTVC)
             }
+        case "TweetPicturesSegueID":
+            if let tweetPicturesVC = segue.destination as? TweetPicturesViewController {
+                var medias: [(mediaItem: Twitter.MediaItem, tweet: Twitter.Tweet)] = []
+                for tweetArray in tweets {
+                    for tweet in tweetArray {
+                        medias.append(contentsOf: tweet.media.flatMap({ (mediaItem) in
+                            return (mediaItem, tweet)
+                        }))
+                    }
+                }
+                let tweetsImagesModel = TweetsImagesModel(withMediaItems: medias)
+                tweetPicturesVC.viewModel = tweetsImagesModel
+                dependencyInjector?.inject(to: tweetPicturesVC)
+            }
+        default:
+            break
         }
+    }
+    
+    // MARK: - Go to the Root View Controller
+    @IBAction func backwardAction(_ sender: UIBarButtonItem) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }

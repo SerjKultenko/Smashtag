@@ -14,9 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var tweetSearchHistory = TweetSearchHistory()
+    var dependencyInjector = DependencyInjector()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        _ = tweetSearchHistory.loadHistory()
+        dependencyInjector.tweetSearchHistory = tweetSearchHistory
+        
+        if let vc = window?.rootViewController?.contents as? UITabBarController,
+            let viewControllers = vc.viewControllers {
+            for viewController in viewControllers {
+                    dependencyInjector.inject(to: viewController)
+            }
+//            print(viewControllers)
+        }
+        
         return true
     }
 
@@ -87,6 +101,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //  although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+}
+
+extension UIViewController {
+    var contents: UIViewController {
+        get {
+            if let navigation = self as? UINavigationController {
+                return navigation.visibleViewController ?? self
+            } else {
+                return self
             }
         }
     }

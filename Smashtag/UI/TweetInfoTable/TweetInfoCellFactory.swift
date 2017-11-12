@@ -13,6 +13,8 @@ import Twitter
 class TweetInfoCellFactory {
     var tweetInfoModel: TweetInfoModel?
 
+    static let kTweetInfoSimpleCellID = "kTweetInfoSimpleCellID"
+    
     init(tweetInfoModel: TweetInfoModel) {
         self.tweetInfoModel = tweetInfoModel
     }
@@ -44,21 +46,23 @@ class TweetInfoCellFactory {
             }
             return cell
         case .HashTagsSection:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "HashTagsSectionCellID")
+            let cell = tableView.dequeueReusableCell(withIdentifier: TweetInfoCellFactory.kTweetInfoSimpleCellID, for: IndexPath(row: row, section: section))
             if let mention = objectToShow as? Twitter.Mention {
                 cell.textLabel?.text = mention.keyword
             }
             return cell
         case .URLsSection:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "URLsSectionCellID")
+            let cell = tableView.dequeueReusableCell(withIdentifier: TweetInfoCellFactory.kTweetInfoSimpleCellID, for: IndexPath(row: row, section: section))
             if let mention = objectToShow as? Twitter.Mention {
                 cell.textLabel?.text = mention.keyword
             }
             return cell
         case .UserMentionsSection:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "UserMentionsSectionCellID")
+            let cell = tableView.dequeueReusableCell(withIdentifier: TweetInfoCellFactory.kTweetInfoSimpleCellID, for: IndexPath(row: row, section: section))
             if let mention = objectToShow as? Twitter.Mention {
                 cell.textLabel?.text = mention.keyword
+            } else if let mentionString = objectToShow as? String {
+                cell.textLabel?.text = mentionString
             }
             return cell
         }
