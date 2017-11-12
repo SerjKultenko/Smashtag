@@ -32,13 +32,22 @@ class TweetPicturesViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TweetInfoSegueID",
-            let tweetInfoVC = segue.destination as? TweetInfoTableTableViewController,
-            let cell = sender as? TweetImageCollectionViewCell,
-            let tweet = cell.tweet
-        {
-            tweetInfoVC.tweetInfoModel = TweetInfoModel(for: tweet)
-            dependencyInjector?.inject(to: tweetInfoVC)
+//        if segue.identifier == "TweetInfoSegueID",
+//            let tweetInfoVC = segue.destination as? TweetInfoTableTableViewController,
+//            let cell = sender as? TweetImageCollectionViewCell,
+//            let tweet = cell.tweet
+//        {
+//            tweetInfoVC.tweetInfoModel = TweetInfoModel(for: tweet)
+//            dependencyInjector?.inject(to: tweetInfoVC)
+//        }
+        if segue.identifier == "SmashTweetTableSegueID" {
+            if let tweetsVC = segue.destination as? SmashTweetTableViewController,
+                let cell = sender as? TweetImageCollectionViewCell,
+                let tweet = cell.tweet
+            {
+                dependencyInjector?.inject(to: tweetsVC)
+                tweetsVC.insertTweets([tweet])
+            }
         }
     }
     
