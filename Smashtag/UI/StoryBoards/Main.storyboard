@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GYt-j0-pem">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lb1-pR-ob1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,12 +11,28 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="zf0-Sc-oes">
+            <objects>
+                <navigationController id="Lb1-pR-ob1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8vl-uD-8xX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Nw8-Ba-LRV" kind="relationship" relationship="rootViewController" id="0i0-bi-GXI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbB-uL-NdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1839" y="-224"/>
+        </scene>
         <!--Tweets Search-->
         <scene sceneID="PBf-FU-jFX">
             <objects>
                 <tableViewController storyboardIdentifier="SmashTweetTableViewControllerID" title="Tweets Search" id="qGf-I8-8L8" customClass="SmashTweetTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="28" sectionFooterHeight="28" id="BUP-RG-V78">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" id="aA2-ap-w5U">
@@ -35,10 +51,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zhL-rJ-Br9">
-                                            <rect key="frame" x="16" y="11" width="343" height="74"/>
+                                            <rect key="frame" x="16" y="11.5" width="343" height="73.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-dl-DPq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="73.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-hg-dLz">
                                                             <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
@@ -48,7 +64,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vb9-kS-qYe">
-                                                            <rect key="frame" x="0.0" y="64" width="64" height="10"/>
+                                                            <rect key="frame" x="0.0" y="64" width="64" height="9.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -97,20 +113,20 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Tweets Search" id="1gO-hL-vwB"/>
+                    <tabBarItem key="tabBarItem" title="Tweets Search" id="o2w-Ht-30k"/>
                     <navigationItem key="navigationItem" id="RBo-Ax-QEy">
                         <rightBarButtonItems>
                             <barButtonItem title="Tweeters" id="ZFs-1e-TcI">
                                 <connections>
-                                    <segue destination="xO1-F4-76B" kind="show" identifier="Tweeters Mentioning Search Term" id="VyK-eD-P5V"/>
+                                    <segue destination="xO1-F4-76B" kind="show" identifier="Tweeters Mentioning Search Term" id="QDU-ko-s7o"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="picture-image" id="5w8-gQ-aOn">
+                            <barButtonItem image="picture-image" id="5w8-gQ-aOn">
                                 <connections>
                                     <segue destination="TOf-Id-YoH" kind="show" identifier="TweetPicturesSegueID" id="RdK-0b-0nM"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="backward-image" id="QR4-EB-cQp">
+                            <barButtonItem image="backward-image" id="QR4-EB-cQp">
                                 <connections>
                                     <action selector="backwardAction:" destination="qGf-I8-8L8" id="EvA-7I-aFr"/>
                                 </connections>
@@ -130,7 +146,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0E-CX-6Qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-156" y="-178"/>
+            <point key="canvasLocation" x="-50" y="-224"/>
         </scene>
         <!--Smash Tweeters Table View Controller-->
         <scene sceneID="FMO-o4-bwy">
@@ -265,7 +281,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Akx-nW-ziI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="prv-Jx-nLM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jCW-CL-luZ">
@@ -299,44 +315,39 @@
             </objects>
             <point key="canvasLocation" x="1666" y="-869"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="eeI-3b-0O6">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GYt-j0-pem" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mCG-OG-1VU">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Nw8-Ba-LRV" kind="relationship" relationship="rootViewController" id="J6q-Oi-soo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JZL-GD-FiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1735" y="-179"/>
-        </scene>
-        <!--Tab Bar Controller-->
+        <!--Tweet Tab Bar Controller-->
         <scene sceneID="rTz-mw-u9c">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Nw8-Ba-LRV" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Nw8-Ba-LRV" customClass="TweetTabBarController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="2Pb-2T-uNd"/>
+                    <navigationItem key="navigationItem" id="2Pb-2T-uNd">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Tweeters" id="OdE-tq-CR4">
+                                <connections>
+                                    <action selector="tweetersAction:" destination="Nw8-Ba-LRV" id="uBT-t5-iqU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="picture-image" id="rop-Jw-Fbz">
+                                <connections>
+                                    <action selector="tweetsPicturesAction:" destination="Nw8-Ba-LRV" id="MVE-ae-cEt"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9M4-8v-A5U">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="qGf-I8-8L8" kind="relationship" relationship="viewControllers" id="Gwr-6M-805"/>
-                        <segue destination="XkI-ve-NUP" kind="relationship" relationship="viewControllers" id="lkL-9V-PtZ"/>
+                        <segue destination="qGf-I8-8L8" kind="relationship" relationship="viewControllers" id="olE-bP-8xC"/>
+                        <segue destination="XkI-ve-NUP" kind="relationship" relationship="viewControllers" id="xVs-v5-baJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8OB-1q-GbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-956" y="-179"/>
+            <point key="canvasLocation" x="-1020" y="-224"/>
         </scene>
         <!--Searches History-->
         <scene sceneID="0gC-WT-GGv">
@@ -364,7 +375,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="qGf-I8-8L8" kind="show" identifier="SmashTweetTableSegueID" id="N8Z-hC-5Kc"/>
+                                    <segue destination="qGf-I8-8L8" kind="show" identifier="SmashTweetTableSegueID" id="J7V-rc-XCK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -374,11 +385,14 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Searches History" id="CDS-de-UpG"/>
+                    <tabBarItem key="tabBarItem" title="Searches History" id="GFM-9Z-nc0"/>
+                    <navigationItem key="navigationItem" id="TXq-dH-yyA">
+                        <barButtonItem key="backBarButtonItem" title="dfdfsd" id="xlL-xe-V5j"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epa-wV-nqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-956" y="565"/>
+            <point key="canvasLocation" x="-1020" y="537"/>
         </scene>
         <!--Pictures-->
         <scene sceneID="xES-KD-XnZ">
@@ -393,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TbM-ON-HtJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dWU-d9-Ryt">
                                     <size key="itemSize" width="104" height="104"/>
@@ -451,7 +465,7 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-156" y="555.47226386806597"/>
+            <point key="canvasLocation" x="272.80000000000001" y="553.67316341829087"/>
         </scene>
     </scenes>
     <resources>
@@ -460,6 +474,6 @@
         <image name="picture-image" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tG2-cy-JlH"/>
+        <segue reference="olE-bP-8xC"/>
     </inferredMetricsTieBreakers>
 </document>

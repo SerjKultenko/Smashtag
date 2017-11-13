@@ -10,6 +10,8 @@ import UIKit
 
 class SearchHistoryTableViewController: UITableViewController, TweetSearchHistoryUse, DependencyInjectorUse, TweetSearchHistoryDelegate
 {
+    
+    // MARK: - Vars
     var tweetSearchHistory: TweetSearchHistory? {
         didSet {
             tweetSearchHistory?.delegate = self
@@ -17,10 +19,16 @@ class SearchHistoryTableViewController: UITableViewController, TweetSearchHistor
     }
     var dependencyInjector: DependencyInjector?
 
+    // MARK: - VC Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true;
+    }
+
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -69,7 +77,6 @@ class SearchHistoryTableViewController: UITableViewController, TweetSearchHistor
                 tweetsVC.searchText = cell.textLabel?.text
             }
         }
-
     }
     
     // MARK: - TweetSearchHistoryDelegate

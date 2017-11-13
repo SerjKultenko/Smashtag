@@ -25,10 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let vc = window?.rootViewController?.contents as? UITabBarController,
             let viewControllers = vc.viewControllers {
-            for viewController in viewControllers {
-                    dependencyInjector.inject(to: viewController)
+            for vc in viewControllers {
+                var targetVC = vc
+                if let nav = vc as? UINavigationController {
+                    if nav.visibleViewController != nil {
+                        targetVC = nav.visibleViewController!
+                    }
+                }
+                dependencyInjector.inject(to: targetVC)
             }
-//            print(viewControllers)
         }
         
         return true

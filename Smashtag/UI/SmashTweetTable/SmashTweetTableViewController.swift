@@ -15,6 +15,10 @@ class SmashTweetTableViewController: TweetTableViewController
     var container: NSPersistentContainer? =
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false;
+    }
+    
     override func insertTweets(_ newTweets: [Twitter.Tweet]) {
         super.insertTweets(newTweets)
         updateDatabase(with: newTweets)
